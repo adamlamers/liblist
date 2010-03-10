@@ -12,16 +12,20 @@
 
 typedef struct list_tag
 {
-    void *first;    /**< First element in the list */
-    void *last;     /**< Last element in the list */
-    int64_t length; /**< Number of elements in the list */
+    void *data;                /**< Current element data */
+    struct list_tag *next;     /**< Next element pointer */
+    struct list_tag *prev;     /**< Previous element pointer */
 } list;
 
-typedef struct node_tag
-{
-    void *next; /**< Succeding element in the list */
-    void *prev; /**< Preceding element in the list */
-    void *data; /**< Data for this node in the list */
-} node;
+/**
+ * Creates a new list.
+ * @return pointer to the new list
+ */
+extern list* new_list();
+
+/**
+ * Deletes an existing list.
+ */
+extern void delete_list();
 
 #endif // LIST_H_INCLUDED
