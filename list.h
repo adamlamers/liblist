@@ -24,6 +24,26 @@ typedef struct list_tag
 extern list* new_list();
 
 /**
+ * Appends an element to a list
+ * @param l Pointer to the list to add the item to, or NULL to begin a new list.
+ * @param data Pointer to the data to store in the new element.
+ * @return pointer to the new list, with the recently added item first.
+ */
+extern list *list_append(list *l, void *data);
+
+/**
+ * Rewinds to the beginning of the list.
+ * @param l The list to rewind.
+ */
+#define list_rewind(l) for(;l->prev != NULL; l = l->prev)
+
+/**
+ * Fast-fowards to the end of the list.
+ * @param l The list to fast-forward
+ */
+#define list_end(l) for(;l->next != NULL; l = l->next)
+
+/**
  * Deletes an existing list.
  */
 extern void delete_list();

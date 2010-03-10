@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1268220280 source:c:\users\adam\documents\projects\c\liblist\list.c
+1268221719 source:c:\users\adam\documents\projects\c\liblist\list.c
 	<stdlib.h>
 	<stdint.h>
 	<errno.h>
 	"list.h"
 
-1268216463 c:\users\adam\documents\projects\c\liblist\list.h
+1268221296 c:\users\adam\documents\projects\c\liblist\list.h
 	<stdint.h>
 

@@ -28,23 +28,34 @@ list *list_append(list *l, void *data)
     }
     else
     {
-        list *newElement = malloc(sizeof(list));
-        if(!newElement) return NULL;
-        
-        l->next = newElement;
-        newElement->next = NULL;
-        newElement->prev = l;
-        newElement->data = data;
-
-        return newElement;
+        list_end(l);
+        list *newList = malloc(sizeof(list));
+        if(!newList) return NULL;
+        l->next = newList;
+        newList->next = NULL;
+        newList->prev = l;
+        newList->data = data;
+        return newList;
     }
 }
 
-int list_prepend(list **l, void *data)
+list *list_prepend(list *l, void *data)
 {
-    if(*l != NULL)
-        for(;(*l)->prev != NULL; *l = (*l)->prev);
-    
+    if(!l)
+    {
+        return new_list(data);
+    }
+    else
+    {
+        list_rewind(l);
+        list *newList = malloc(sizeof(list));
+        if(!newList) return NULL;
+        l->prev = newList;
+        newList->next = l;
+        newList->prev = NULL;
+        newList->data = data;
+        return newList;
+    }
 }
 
 int list_insert(list *l, void *data, int64_t pos)
@@ -64,14 +75,17 @@ int main(int a, char **b)
     files = list_append(files, "file one");
     files = list_append(files, "file two");
     files = list_append(files, "file three");
-    
-    //Rewind the list
-    for(;files->prev != NULL; files = files->prev);
     /* Iterate through the list printing the data */
-    do
+    list_rewind(files);
+    while(files)
     {
         printf("%s\n", files->data);
         files = files->next;
-    }while(files);
+    }
+     while(files)
+    {
+        printf("%s\n", files->data);
+        files = files->prev;
+    }
     return 0;
 }
