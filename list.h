@@ -32,6 +32,14 @@ extern list* new_list();
 extern list *list_append(list *l, void *data);
 
 /**
+ * Prepends an element to a list
+ * @param l Pointer to the list to add the item to, or NULL to begin a new list.
+ * @param data Pointer to the data to store in the new element.
+ * @return pointer to the beginning of the new list.
+ */
+extern list* list_prepend(list *l, void *data);
+
+/**
  * Rewinds to the beginning of the list.
  * @param l The list to rewind.
  */
@@ -41,7 +49,6 @@ inline list* list_rewind(list *l)
     for(;l->prev != NULL; l = l ->prev);
     return l;
 }
-//#define list_rewind(l) for(;l->prev != NULL; l = l->prev)
 
 /**
  * Fast-fowards to the end of the list.

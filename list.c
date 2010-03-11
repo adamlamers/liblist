@@ -72,10 +72,14 @@ list *list_reverse(list *l)
 
 void delete_list(list *l)
 {
-    //Delete the list header
-    free(l);
+    list *temp = list_rewind(l);
+    for(;temp != NULL; temp = temp->next)
+    {
+        if(temp->prev) free(temp->prev);
+    }
+    free(temp);
 }
-
+#ifdef DEBUG
 int main(int a, char **b)
 {
     list *files = NULL;
@@ -89,6 +93,8 @@ int main(int a, char **b)
         printf("%s\n", temp->data);
         temp = temp->next;
     }
-    /* Iterate through the list printing the data */
+    delete_list(files);
+    // Iterate through the list printing the data
     return 0;
 }
+#endif
