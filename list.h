@@ -35,13 +35,24 @@ extern list *list_append(list *l, void *data);
  * Rewinds to the beginning of the list.
  * @param l The list to rewind.
  */
-#define list_rewind(l) for(;l->prev != NULL; l = l->prev)
+list* list_rewind(list *l);
+inline list* list_rewind(list *l)
+{
+    for(;l->prev != NULL; l = l ->prev);
+    return l;
+}
+//#define list_rewind(l) for(;l->prev != NULL; l = l->prev)
 
 /**
  * Fast-fowards to the end of the list.
  * @param l The list to fast-forward
  */
-#define list_end(l) for(;l->next != NULL; l = l->next)
+list* list_end(list *l);
+inline list* list_end(list *l)
+{
+    for(;l->next != NULL; l = l->next);
+    return l;
+}
 
 /**
  * Deletes an existing list.
