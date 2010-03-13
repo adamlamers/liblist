@@ -1,7 +1,7 @@
 /* C Library for simple linked lists
  * File: list.c
  * Creation Date: March 9th, 2010
- * Last Modified Date: March 9th, 2010
+ * Last Modified Date: March 12th, 2010
  * Version: 0.0.1
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
@@ -10,6 +10,11 @@
 #include <stdint.h>
 #include <errno.h>
 #include "list.h"
+
+#ifdef DEBUG
+#include <windows.h>
+#include <psapi.h>
+#endif
 
 list* new_list(void *data)
 {
@@ -70,31 +75,55 @@ list *list_reverse(list *l)
     return last;
 }
 
+int list_length(list *l)
+{
+    int count = 0;
+    for(;l != NULL; l = l->next)
+    {
+        count++;
+    }
+    return count;
+}
+
 void delete_list(list *l)
 {
-    list *temp = list_rewind(l);
-    for(;temp != NULL; temp = temp->next)
-    {
-        if(temp->prev) free(temp->prev);
-    }
-    free(temp);
+    while(l) l = delete_first(l);
 }
+
+list *delete_first(list *l)
+{
+    if(l)
+    {
+        if(l->next)
+        {
+            list *newList = l->next;
+            newList->prev = NULL;
+            free(l);
+            return newList;
+        }
+        else
+        {
+            free(l);
+            return NULL;
+        }
+    }
+    return NULL;
+}
+
+list* list_rewind(list *l)
+{
+    for(;l->prev != NULL; l = l ->prev);
+    return l;
+}
+
+list* list_end(list *l)
+{
+    for(;l->next != NULL; l = l->next);
+    return l;
+}
+
 #ifdef DEBUG
 int main(int a, char **b)
 {
-    list *files = NULL;
-    files = list_prepend(files, "file one");
-    files = list_prepend(files, "file two");
-    files = list_prepend(files, "file three");
-    files = list_reverse(files);
-    list *temp = files;
-    while(temp)
-    {
-        printf("%s\n", temp->data);
-        temp = temp->next;
-    }
-    delete_list(files);
-    // Iterate through the list printing the data
-    return 0;
 }
 #endif

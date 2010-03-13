@@ -1,6 +1,6 @@
 /* File: list.h
  * Creation Date: March 9th, 2010
- * Last Modified Date: March 9th, 2010
+ * Last Modified Date: March 12th, 2010
  * Version: 0.0.1
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
@@ -9,6 +9,11 @@
 #define LIST_H_INCLUDED
 
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 typedef struct list_tag
 {
@@ -21,7 +26,7 @@ typedef struct list_tag
  * Creates a new list.
  * @return pointer to the new list
  */
-extern list* new_list();
+extern list* new_list(void *data);
 
 /**
  * Appends an element to a list
@@ -43,27 +48,22 @@ extern list* list_prepend(list *l, void *data);
  * Rewinds to the beginning of the list.
  * @param l The list to rewind.
  */
-list* list_rewind(list *l);
-inline list* list_rewind(list *l)
-{
-    for(;l->prev != NULL; l = l ->prev);
-    return l;
-}
+extern list* list_rewind(list *l);
 
 /**
  * Fast-fowards to the end of the list.
  * @param l The list to fast-forward
  */
-list* list_end(list *l);
-inline list* list_end(list *l)
-{
-    for(;l->next != NULL; l = l->next);
-    return l;
-}
+extern list* list_end(list *l);
 
 /**
  * Deletes an existing list.
  */
-extern void delete_list();
+extern void delete_list(list *l);
+list *delete_first(list *l);
+
+#ifdef __cplusplus
+}
+#endif //extern "C"
 
 #endif // LIST_H_INCLUDED
