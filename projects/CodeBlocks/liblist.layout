@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
-	<File name="..\..\list.c" open="0" top="0" tabpos="1">
-		<Cursor position="1656" topLine="78" />
-	</File>
-	<File name="..\..\list.h" open="0" top="0" tabpos="4">
-		<Cursor position="1587" topLine="20" />
-	</File>
+	<ActiveTarget name="Debug" />
 </CodeBlocks_layout_file>

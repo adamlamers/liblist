@@ -1,8 +1,8 @@
 /* C Library for simple linked lists
  * File: list.c
  * Creation Date: March 9th, 2010
- * Last Modified Date: March 12th, 2010
- * Version: 0.0.1
+ * Last Modified Date: March 29th, 2010
+ * Version: 0.0.2
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
 

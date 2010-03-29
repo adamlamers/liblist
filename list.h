@@ -1,7 +1,7 @@
 /* File: list.h
  * Creation Date: March 9th, 2010
- * Last Modified Date: March 12th, 2010
- * Version: 0.0.1
+ * Last Modified Date: March 29th, 2010
+ * Version: 0.0.2
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
 
@@ -24,21 +24,25 @@ typedef struct list_tag
 
 /**
  * Creates a new list.
- * @return pointer to the new list
+ * @return Pointer to a new list.
  */
 extern list* new_list(void *data);
 
 /**
- * Appends an element to a list
- * @param l Pointer to the list to add the item to, or NULL to begin a new list.
+ * \brief Appends an element to a list
+ * If a NULL pointer is passed for the "l" argument of this function, a new list is created, the item appened, and
+ * the created list is returned.
+ * @param l Pointer to a list to append an item to.
  * @param data Pointer to the data to store in the new element.
  * @return pointer to the new list, with the recently added item first.
  */
 extern list *list_append(list *l, void *data);
 
 /**
- * Prepends an element to a list
- * @param l Pointer to the list to add the item to, or NULL to begin a new list.
+ * \brief Prepends an element to a list
+ * If a NULL pointer is passed for the "l" argument of this function, a new list is created, the item is prepended, and
+ * the created list is returned.
+ * @param l Pointer to a list to append an item to.
  * @param data Pointer to the data to store in the new element.
  * @return pointer to the beginning of the new list.
  */
@@ -51,16 +55,24 @@ extern list* list_prepend(list *l, void *data);
 extern list* list_rewind(list *l);
 
 /**
- * Fast-fowards to the end of the list.
- * @param l The list to fast-forward
+ * \brief Fast-fowards to the end of the list.
+ * This function is NULL-Safe, nothing will happen if a null pointer is passed as an argument.
+ * @param l The list to fast-forward.
  */
 extern list* list_end(list *l);
 
 /**
- * Deletes an existing list.
+ * Deletes the container elements for the list only.
+ * @param l The list to delete.
  */
 extern void delete_list(list *l);
-list *delete_first(list *l);
+
+/**
+ * \brief Deletes the first element in a list.
+ * If there are no more elements in the list to delete, this function will return NULL.
+ * @param l The list to delete the first element from.
+ */
+extern list *delete_first(list *l);
 
 #ifdef __cplusplus
 }
