@@ -1,9 +1,16 @@
 /* File: list.h
  * Creation Date: March 9th, 2010
  * Last Modified Date: March 29th, 2010
- * Version: 0.0.2
+ * Version: 0.0.3
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
+
+/** @file list.h
+ *  @brief Exports of the liblist library
+ *  @author Adam Lamers
+ *
+ *  This file lists all export functions or includes subheaders of the liblist library.
+ */
 
 #ifndef LIST_H_INCLUDED
 #define LIST_H_INCLUDED
@@ -15,11 +22,12 @@ extern "C"
 {
 #endif
 
-typedef struct list_tag
+/** Base structure for a list */
+typedef struct list_t
 {
     void *data;                /**< Current element data */
-    struct list_tag *next;     /**< Next element pointer */
-    struct list_tag *prev;     /**< Previous element pointer */
+    struct list_t *next;     /**< Next element pointer */
+    struct list_t *prev;     /**< Previous element pointer */
 } list;
 
 /**
@@ -29,7 +37,8 @@ typedef struct list_tag
 extern list* new_list(void *data);
 
 /**
- * \brief Appends an element to a list
+ * @brief Appends an element to a list
+ *
  * If a NULL pointer is passed for the "l" argument of this function, a new list is created, the item appened, and
  * the created list is returned.
  * @param l Pointer to a list to append an item to.
@@ -39,7 +48,8 @@ extern list* new_list(void *data);
 extern list *list_append(list *l, void *data);
 
 /**
- * \brief Prepends an element to a list
+ * @brief Prepends an element to a list
+ *
  * If a NULL pointer is passed for the "l" argument of this function, a new list is created, the item is prepended, and
  * the created list is returned.
  * @param l Pointer to a list to append an item to.
@@ -55,7 +65,8 @@ extern list* list_prepend(list *l, void *data);
 extern list* list_rewind(list *l);
 
 /**
- * \brief Fast-fowards to the end of the list.
+ * @brief Fast-fowards to the end of the list.
+ *
  * This function is NULL-Safe, nothing will happen if a null pointer is passed as an argument.
  * @param l The list to fast-forward.
  */
@@ -68,22 +79,25 @@ extern list* list_end(list *l);
 extern void delete_list(list *l);
 
 /**
- * \brief Deletes the first element in a list.
+ * @brief Deletes the first element in a list.
+ *
  * If there are no more elements in the list to delete, this function will return NULL.
  * @param l The list to delete the first element from.
  */
 extern list *delete_first(list *l);
 
 /**
- * \brief Frees and deletes the first element in a list.
- * NOTE: The l->data member of the first member in the list MUST be allocated by malloc, or the behavior is undefined.
+ * @brief Frees and deletes the first element in a list.
+ * 
+ * <strong style="color:#FF0000">NOTE:</strong> The l->data member of the first member in the list MUST be allocated by malloc, or the behavior is undefined.
  * @param l The list to delete and free the first element from.
  */
 extern list *free_first(list *l);
 
 /**
- * \brief Frees and deletes all elements in a list.
- * NOTE: The l->data member of all members of the list MUST be allocated by malloc, or the behavior is undefined.
+ * @brief Frees and deletes all elements in a list.
+ *
+ * <strong style="color:#FF0000">NOTE:</strong> The l->data member of all members of the list MUST be allocated by malloc, or the behavior is undefined.
  * @param l The list to delete and free all elements of.
  */
 extern void list_free_all(list *l);
