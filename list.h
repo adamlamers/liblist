@@ -74,6 +74,20 @@ extern void delete_list(list *l);
  */
 extern list *delete_first(list *l);
 
+/**
+ * \brief Frees and deletes the first element in a list.
+ * NOTE: The l->data member of the first member in the list MUST be allocated by malloc, or the behavior is undefined.
+ * @param l The list to delete and free the first element from.
+ */
+extern list *free_first(list *l);
+
+/**
+ * \brief Frees and deletes all elements in a list.
+ * NOTE: The l->data member of all members of the list MUST be allocated by malloc, or the behavior is undefined.
+ * @param l The list to delete and free all elements of.
+ */
+extern void list_free_all(list *l);
+
 #ifdef __cplusplus
 }
 #endif //extern "C"

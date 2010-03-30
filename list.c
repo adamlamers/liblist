@@ -8,7 +8,6 @@
 
 #include <stdlib.h>
 #include <stdint.h>
-#include <errno.h>
 #include "list.h"
 
 #ifdef DEBUG
@@ -110,6 +109,28 @@ list *delete_first(list *l)
     return NULL;
 }
 
+list *free_first(list *l)
+{
+    if(l)
+    {
+        if(l->next)
+        {
+            list *newList = l->next;
+            newList->prev = NULL;
+            free(l->data);
+            free(l);
+            return newList;
+        }
+        else
+        {
+            free(l->data);
+            free(l);
+            return NULL;
+        }
+    }
+    return NULL;
+}
+
 list* list_rewind(list *l)
 {
     for(;l->prev != NULL; l = l ->prev);
@@ -122,8 +143,28 @@ list* list_end(list *l)
     return l;
 }
 
+void list_free_all(list *l)
+{
+    while(l) l = free_first(l);
+}
+
 #ifdef DEBUG
 int main(int a, char **b)
 {
+    list *z = NULL;
+    char *data;
+    int i = 0;
+    printf("adding elements...\n");
+    for(i = 0; i < 128000; i++)
+    {
+        data = malloc(1024);
+        data[0] = i;
+        z = list_append(z, data);
+    }
+    system("pause");
+    list_free_all(z);
+    printf("freeing...\n");
+    system("pause");
+    return 0;
 }
 #endif
